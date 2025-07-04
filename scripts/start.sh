@@ -116,13 +116,13 @@ sync_workspace() {
   cd "${RP_VOLUME}"
   echo "Syncing workspace..."
   # if directory still exists
-  if [ -d "${RP_VOLUME}/StableSwarmUI" ]; then
-    echo "StableSwarmUI already exists [ NOT CREATING ]"
+  if [ -d "${RP_VOLUME}/SwarmUI" ]; then
+    echo "SwarmUI already exists [ NOT CREATING ]"
   else
-    git clone https://github.com/mcmonkeyprojects/SwarmUI.git StableSwarmUI
+    git clone https://github.com/mcmonkeyprojects/SwarmUI.git SwarmUI
   fi
 
-  cd StableSwarmUI
+  cd SwarmUI
   cd launchtools && \
   # https://learn.microsoft.com/en-us/dotnet/core/install/linux-scripted-manual#scripted-install
   wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh && \
@@ -142,7 +142,7 @@ export_env_vars() {
 
 start_SWui() {
    #  Sync new version
-    cd "${RP_VOLUME}"/StableSwarmUI
+    cd "${RP_VOLUME}"/SwarmUI
 
     source ./launchtools/linux-path-fix.sh
     git pull
@@ -153,8 +153,8 @@ start_SWui() {
     cur_head=`git rev-parse HEAD`
     echo $cur_head > src/bin/last_build
 
-    echo "Starting StableSwarmUI..."
-    /bin/bash "${RP_VOLUME}"/StableSwarmUI/launch-linux.sh --host 0.0.0.0 --port 2254 --launch_mode none &
+    echo "Starting SwarmUI..."
+    /bin/bash "${RP_VOLUME}"/SwarmUI/launch-linux.sh --host 0.0.0.0 --port 2254 --launch_mode none &
 }
 export_env_vars
 sync_workspace
