@@ -114,9 +114,9 @@ start_ssh
 
 sync_workspace() {
   cd "${RP_VOLUME}"
-  echo "Syncing workspace..."
+  echo "Cloning latest code..."
   # if directory still exists
-  if [ -d "${RP_VOLUME}/SwarmUI" ]; then
+  if [ -d "${RP_VOLUME}/SwarmUI/launchtools" ]; then
     echo "SwarmUI already exists [ NOT CREATING ]"
   else
     git clone https://github.com/mcmonkeyprojects/SwarmUI.git SwarmUI
